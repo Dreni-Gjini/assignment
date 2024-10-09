@@ -6,10 +6,10 @@ import { CreateMessageDto } from './dto/create-message.dto';
 export class MessagesService {
   private messages: Message[] = [];
 
-  createMessage({ content }: CreateMessageDto): Message {
+  createMessage({ content }: CreateMessageDto, userId: string): Message {
     const newMessage = new Message();
     newMessage.content = content;
-    newMessage.userId = 'some test id';
+    newMessage.userId = userId;
 
     this.messages.push(newMessage);
     return newMessage;

@@ -17,7 +17,7 @@ import { PasswordService } from './password.service';
       useFactory: async (configService: ConfigService) => {
         const securityConfig = configService.get<SecurityConfig>('security');
         return {
-          secret: 'HARDCODEDSUPERSECRET2',
+          secret: 'HARDCODEDSUPERSECRET',
           signOptions: {
             expiresIn: securityConfig.expiresIn,
           },
