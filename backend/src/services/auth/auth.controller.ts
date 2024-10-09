@@ -1,18 +1,12 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { RegisterInput } from './dto/register.input';
+import { User } from 'src/user/entities/user.entity';
+import { Token } from './entities/token.entity';
 import { LoginInput } from './dto/login.input';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 
-@Controller('auth')
+@Controller('/auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
@@ -20,8 +14,8 @@ export class AuthController {
   @ApiOperation({ summary: 'Register a new user' })
   @ApiResponse({ status: 201, description: 'User registered successfully' })
   @ApiResponse({ status: 400, description: 'Bad request, invalid input' })
-  register(@Body() signupInput: RegisterInput): Promise<{ success: boolean }> {
-    return this.authService.createUser(signupInput);
+  register(@Body() registerInput: RegisterInput): Promise<Token> {
+    return this.authService.createUser(registerInput);
   }
 
   @Post('/login')
@@ -31,7 +25,7 @@ export class AuthController {
     status: 401,
     description: 'Unauthorized, invalid credentials',
   })
-  login(@Body() loginInput: LoginInput): Promise<{ success: boolean }> {
+  login(@Body() loginInput: LoginInput): Promise<Token> {
     return this.authService.login(loginInput);
   }
 }
