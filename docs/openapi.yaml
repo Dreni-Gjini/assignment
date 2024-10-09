@@ -11,7 +11,68 @@ paths:
       responses:
         "200":
           description: ""
+  /auth/register:
+    post:
+      operationId: AuthController_register
+      summary: Register a new user
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterInput"
+      responses:
+        "201":
+          description: User registered successfully
+        "400":
+          description: Bad request, invalid input
+  /auth/login:
+    post:
+      operationId: AuthController_login
+      summary: User login
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInput"
+      responses:
+        "201":
+          description: Login successful
+        "401":
+          description: Unauthorized, invalid credentials
 components:
-  schemas: {}
+  schemas:
+    RegisterInput:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The username of the user
+          example: johndoe
+        password:
+          type: string
+          description: The password of the user. Must be at least 8 characters long.
+          example: strongPassword123
+          minLength: 8
+      required:
+        - username
+        - password
+    LoginInput:
+      type: object
+      properties:
+        username:
+          type: string
+          example: johndoe
+          description: The username of the user
+        password:
+          type: string
+          example: strongPassword123
+          description: The password of the user
+      required:
+        - username
+        - password
 tags: []
 servers: []
