@@ -43,6 +43,25 @@ paths:
           description: Login successful
         "401":
           description: Unauthorized, invalid credentials
+  /messages:
+    post:
+      operationId: MessagesController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateMessageDto"
+      responses:
+        "201":
+          description: ""
+    get:
+      operationId: MessagesController_findAll
+      parameters: []
+      responses:
+        "200":
+          description: ""
 components:
   schemas:
     RegisterInput:
@@ -74,5 +93,8 @@ components:
       required:
         - username
         - password
+    CreateMessageDto:
+      type: object
+      properties: {}
 tags: []
 servers: []
