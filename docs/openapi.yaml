@@ -46,6 +46,7 @@ paths:
   /messages:
     post:
       operationId: MessagesController_create
+      summary: Create a new message
       parameters: []
       requestBody:
         required: true
@@ -55,13 +56,24 @@ paths:
               $ref: "#/components/schemas/CreateMessageDto"
       responses:
         "201":
-          description: ""
+          description: Message created successfully
+        "400":
+          description: Invalid input data
+      tags: &a1
+        - Messages
+      security: &a2
+        - bearer: []
     get:
       operationId: MessagesController_findAll
+      summary: Retrieve all messages for the user
       parameters: []
       responses:
         "200":
-          description: ""
+          description: Messages retrieved successfully
+        "403":
+          description: Forbidden
+      tags: *a1
+      security: *a2
 components:
   schemas:
     RegisterInput:

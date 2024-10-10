@@ -3,5 +3,7 @@ export class Message {
 
   userId: string;
 
-  createdAt: Date = new Date(Date.now());
+  timestamp: Date = new Date(Date.now());
+
+  isAi: boolean = false;
 }
