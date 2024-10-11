@@ -1,22 +1,37 @@
-import { Injectable } from '@angular/core';
+import { inject, Inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {
+  BehaviorSubject,
+  catchError,
+  map,
+  Observable,
+  tap,
+  throwError,
+} from 'rxjs';
 import { Message } from '../models/message.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class MessageService {
-  messages: Message[] = [];
+  private messagesSubject = new BehaviorSubject<Message[]>([]);
+  messages$: Observable<Message[]> = this.messagesSubject.asObservable();
 
-  async all() {
-    const res = await fetch('http://127.0.0.1:3000/messages');
-    const data = await res.json();
+  http = inject(HttpClient);
 
-    this.messages = data.messages.map(
-      (message: any) => new Message(message.text, message.status)
-    );
+  fetchAll(): void {
+    this.http
+      .get<{ messages: Message[] }>('http://127.0.0.1:3000/messages')
+      .pipe(
+        map((data) =>
+          data.messages.map(
+            (message) => new Message(message.content, message.status)
+          )
+        )
+      )
+      .subscribe((messages) => this.messagesSubject.next(messages));
   }
 
-  async add(message: Message) {
-    this.messages.push(message);
+  add(message: Message): void {
+    const currentMessages = this.messagesSubject.value;
+    this.messagesSubject.next([...currentMessages, message]);
   }
 }

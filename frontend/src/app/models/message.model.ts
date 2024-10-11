@@ -1,12 +1,24 @@
+import { MessageStatus } from './message-status.enum';
+
 export class Message {
-  text;
+  content: string;
+  // isAi: boolean;
+  // timestamp: Date;
   status: string;
-  constructor(message: string, status: string) {
-    this.text = message;
+
+  constructor(
+    content: string,
+    // isAi: boolean,
+    status: string
+    // timestamp: Date = new Date()
+  ) {
+    this.content = content;
+    // this.isAi = isAi;
     this.status = status;
+    // this.timestamp = timestamp;
   }
 
-  empty() {
-    return this.text === '';
+  empty(): boolean {
+    return this.content === '';
   }
 }

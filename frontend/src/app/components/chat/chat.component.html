@@ -1,5 +1,12 @@
-<div>
-  <div *ngFor="let message of messages; index as i">
-    <app-message [message]="message" [no]="i"></app-message>
-  </div>
+<div role="list">
+  @for (message of messages$ | async; track message; let i = $index) {
+  <app-message
+    [message]="message"
+    [no]="i"
+    role="listitem"
+    [attr.aria-posinset]="i + 1"
+    [attr.aria-setsize]="(messages$ | async)?.length"
+  >
+  </app-message>
+  }
 </div>

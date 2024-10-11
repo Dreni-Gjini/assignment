@@ -1,32 +1,31 @@
-<div *ngIf="message.text">
-  <div style="background-color: #fff">
-    <span class="block bg-slate-200 text-slate-500"
-      >Preview - {{ message.status }}</span
-    >
-    <div
-      class="p-2"
-      [ngClass]="{ 'text-slate-500': message.status === 'draft' }"
-    >
-      {{ message.text }}
-    </div>
-  </div>
+@if (!message.empty()) {
+<div role="region" aria-label="Message Preview">
+  <app-message [message]="message" no="preview"></app-message>
 </div>
+}
 
-<form (ngSubmit)="onSubmit()">
-  <label class="mt-4">
+<form (submit)="onSubmit()">
+  <label class="mt-4 block">
     <div>Write Message</div>
     <textarea
-      class="block w-full"
+      class="block w-full p-2"
       required
-      [(ngModel)]="message.text"
+      [(ngModel)]="message.content"
+      [ngModelOptions]="{ standalone: true }"
+      aria-label="Message text area"
     ></textarea>
   </label>
 
   <button
     type="submit"
     [disabled]="message.status === 'pending'"
-    class="pointer bg-blue-400 py-2 px-4 mt-2 w-full"
-    [ngClass]="{ 'bg-gray-400': message.status === 'pending' }"
+    [ngClass]="{
+      'py-2 px-4 mt-2 w-full': true,
+      'bg-blue-400 pointer': message.status !== 'pending',
+      'bg-gray-400': message.status === 'pending'
+    }"
+    [attr.aria-busy]="message.status === 'pending' ? 'true' : null"
+    aria-label="Send Message"
   >
     Send
   </button>

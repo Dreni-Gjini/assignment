@@ -1,8 +1,8 @@
-<div style="background-color: #fff">
-  <span class="block bg-slate-200 text-slate-500"
-    >#{{ no }} - {{ message.status }}</span
-  >
+<div class="bg-white" role="region" aria-label="Message">
+  <span class="block bg-slate-200 text-slate-500">
+    #{{ no }} - {{ message.status }}
+  </span>
   <div class="p-2" [ngClass]="{ 'text-slate-500': message.status === 'draft' }">
-    {{ message.text }}
+    {{ message.content }}
   </div>
 </div>

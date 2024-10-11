@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { Message } from '../../models/message.model';
 
 @Component({
   selector: 'app-message',
@@ -8,6 +9,6 @@ import { NgClass } from '@angular/common';
   imports: [NgClass],
 })
 export class MessageComponent {
-  @Input() message: any;
-  @Input() no: number | undefined;
+  @Input() message!: Message;
+  @Input() no!: string | number;
 }
