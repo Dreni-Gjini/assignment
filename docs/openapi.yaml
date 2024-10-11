@@ -59,6 +59,8 @@ paths:
           description: Message created successfully
         "400":
           description: Invalid input data
+        "500":
+          description: Internal Server Error during message creation
       tags: &a1
         - Messages
       security: &a2
@@ -72,6 +74,8 @@ paths:
           description: Messages retrieved successfully
         "403":
           description: Forbidden
+        "500":
+          description: Internal Server Error during message retrieval
       tags: *a1
       security: *a2
 components:

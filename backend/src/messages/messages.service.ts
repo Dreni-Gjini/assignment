@@ -12,7 +12,7 @@ export class MessagesService {
   createMessage(
     createMessageDto: CreateMessageDto,
     userId: string,
-  ): { status: number; message: string } {
+  ): { status: number } {
     try {
       const newMessage = new Message();
       newMessage.content = createMessageDto.content;
@@ -32,8 +32,7 @@ export class MessagesService {
       );
 
       return {
-        status: HttpStatus.CREATED,
-        message: 'Message created successfully',
+        status: HttpStatus.NO_CONTENT,
       };
     } catch (error) {
       throw new HttpException(
