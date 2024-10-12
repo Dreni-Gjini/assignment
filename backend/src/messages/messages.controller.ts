@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body, UseGuards } from '@nestjs/common';
+import { Controller, Post, Get, Body, UseGuards, Query } from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
@@ -34,11 +34,12 @@ export class MessagesController {
   @ApiResponse({ status: 200, description: 'Messages retrieved successfully' })
   @ApiResponse({
     status: 500,
-    description: 'Internal Server Error during message retrieval',
+    description: 'Internal Server Error during message retrieval ',
   })
   @ApiResponse({ status: 403, description: 'Forbidden' })
   @Get()
-  findAll(@UserEntity() user: User, lastFetched: Date) {
+  findAll(@UserEntity() user: User, @Query('timestamp') timestamp: string) {
+    const lastFetched = new Date(Number(timestamp));
     return this.messagesService.getAllMessages(user.id, lastFetched);
   }
 }

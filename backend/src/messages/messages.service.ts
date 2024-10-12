@@ -64,6 +64,12 @@ export class MessagesService {
   }
 
   getAllMessages(userId: string, lastFetched: Date): Message[] {
+    console.log(lastFetched);
+    console.log(
+      this.messages.filter(
+        (message) => message.userId === userId || message.isAi,
+      ),
+    );
     try {
       return this.messages.filter(
         (message) =>
