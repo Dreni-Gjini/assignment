@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: true,
-  imports: [ChatComponent, CreateMessageComponent, HttpClientModule],
+  imports: [ChatComponent, CreateMessageComponent],
 })
 export class AppComponent {
   title = 'Chat Application';

@@ -1,22 +1,21 @@
 import { Component, inject, Inject } from '@angular/core';
-import { MessageService } from '../../services/message.service';
 import { CreateMessageModel } from '../../models/message.model';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MessageStatus } from '../../models/message-status.enum';
 import { MessageComponent } from '../message/message.component';
 import { catchError, of, take, tap } from 'rxjs';
+import { MessagesService } from '../../api';
 
 @Component({
   selector: 'app-create-message',
   templateUrl: './create-message.component.html',
   standalone: true,
   imports: [FormsModule, MessageComponent, NgClass],
-  providers: [MessageService],
+  providers: [MessagesService],
 })
 export class CreateMessageComponent {
-  messageService = inject(MessageService);
-  
+  messageService = inject(MessagesService);
 
   message = new CreateMessageModel('', MessageStatus.DRAFT);
 
