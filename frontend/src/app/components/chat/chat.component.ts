@@ -20,6 +20,7 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.messages$ = this.messageService.messages$;
+
     this.messageService.fetchAll();
   }
 }

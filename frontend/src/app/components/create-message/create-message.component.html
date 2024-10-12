@@ -1,6 +1,6 @@
-@if (!message.empty()) {
+@if (message.isValid()) {
 <div role="region" aria-label="Message Preview">
-  <app-message [message]="message" no="preview"></app-message>
+  <app-message [message]="message.toMessage()" no="preview"></app-message>
 </div>
 }
 
