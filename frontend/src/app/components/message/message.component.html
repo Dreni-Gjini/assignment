@@ -1,17 +1,20 @@
 <div
-  [ngClass]="[
-    'flex flex-col text-white max-w-[320px] rounded-xl leading-1.5 p-2 border-gray-200',
-    message.isAi
-      ? 'bg-gray-700 rounded-tl-none'
-      : 'bg-green-900  rounded-tr-none'
-  ]"
+  [ngClass]="{
+    'flex flex-col text-white max-w-[320px] rounded-xl leading-1.5 p-2 rounded-tr-none border-gray-200': true,
+    'bg-gray-700 rounded-tl-none rounded-tr-xl': message.isAi,
+    'bg-green-900 ': message.status === 'sent',
+    'bg-blue-900': message.status === 'draft',
+    'bg-slate-700': message.status === 'pending',
+    'bg-red-600': message.status === 'failed',
+
+  }"
   role="region"
   aria-label="Message"
 >
   <span class="block text-xs">
     {{ message.isAi ? "AI Bot" : "You" }}
   </span>
-  <div class="p-2" [ngClass]="{ 'text-slate-500': message.status === 'draft' }">
+  <div class="p-2" class="text-white">
     {{ message.content }}
   </div>
   <span class="block text-xs">

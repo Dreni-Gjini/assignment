@@ -96,7 +96,7 @@ export class ChatComponent implements OnInit {
           const lastTimestamp = new Date(lastMessage.timestamp).getTime();
           this.fetchMessages(lastTimestamp);
         } else {
-          console.log('No previous messages to fetch.');
+          this.fetchMessages(new Date('2023-01-01T00:00:00Z').getTime());
         }
       });
   }

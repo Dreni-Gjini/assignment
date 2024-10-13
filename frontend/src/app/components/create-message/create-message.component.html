@@ -1,5 +1,9 @@
 @if (message.isValid()) {
-<div role="region" aria-label="Message Preview">
+<div
+  role="region"
+  aria-label="Message Preview"
+  class="my-10 w-full flex justify-end"
+>
   <app-message [message]="message.toMessage()" no="preview"></app-message>
 </div>
 }

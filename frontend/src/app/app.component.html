@@ -1,4 +1,22 @@
 <div class="max-w-md mx-auto">
-  <h1 class="text-2xl my-8">{{ title }}</h1>
-  <app-chat></app-chat>
+  @if(authService.isLoggedIn()) {
+  <header class="flex items-center justify-between p-4 bg-blue-600 text-white">
+    <div>
+      <h1 class="text-lg font-semibold">
+        Welcome,
+        <span class="font-bold">{{ authService.usernameSignal() }}</span>
+      </h1>
+    </div>
+
+    <button
+      (click)="authService.logout()"
+      class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-red-300"
+      aria-label="Logout"
+    >
+      Logout
+    </button>
+  </header>
+  }
+
+  <router-outlet></router-outlet>
 </div>

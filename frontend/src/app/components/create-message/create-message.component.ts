@@ -20,22 +20,28 @@ export class CreateMessageComponent {
   message = new CreateMessageModel('', MessageStatus.DRAFT);
 
   onSubmit() {
-    this.message.status = MessageStatus.PENDING;
+    this.sendMessage();
+  }
 
-    this.messageService
-      .send({ content: this.message.content })
-      .pipe(
-        finalize(() => {
-          this.message.status = MessageStatus.SENT;
-          this.message.reset();
-        }),
-        catchError((err) => {
-          console.error('Error posting message:', err);
-          this.message.status = MessageStatus.FAILED;
-          return of(null);
-        }),
-        take(1)
-      )
-      .subscribe();
+  private sendMessage() {
+    this.message.status = MessageStatus.PENDING;
+    //since the local server is fast, we dont get to see the pending preview, therefore i added 1sec timer until firing the req
+    setTimeout(() => {
+      this.messageService
+        .send({ content: this.message.content })
+        .pipe(
+          finalize(() => {
+            this.message.status = MessageStatus.SENT;
+            this.message.reset();
+          }),
+          catchError((err) => {
+            console.error('Error posting message:', err);
+            this.message.status = MessageStatus.FAILED;
+            return of(null);
+          }),
+          take(1)
+        )
+        .subscribe();
+    }, 1000);
   }
 }
