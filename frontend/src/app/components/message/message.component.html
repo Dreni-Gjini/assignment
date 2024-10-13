@@ -1,8 +1,20 @@
-<div class="bg-white" role="region" aria-label="Message">
-  <span class="block bg-slate-200 text-slate-500">
-    #{{ no }} - {{ message.status }}
+<div
+  [ngClass]="[
+    'flex flex-col text-white max-w-[320px] rounded-xl leading-1.5 p-2 border-gray-200',
+    message.isAi
+      ? 'bg-gray-700 rounded-tl-none'
+      : 'bg-green-900  rounded-tr-none'
+  ]"
+  role="region"
+  aria-label="Message"
+>
+  <span class="block text-xs">
+    {{ message.isAi ? "AI Bot" : "You" }}
   </span>
   <div class="p-2" [ngClass]="{ 'text-slate-500': message.status === 'draft' }">
     {{ message.content }}
   </div>
+  <span class="block text-xs">
+    {{ message.status }}
+  </span>
 </div>

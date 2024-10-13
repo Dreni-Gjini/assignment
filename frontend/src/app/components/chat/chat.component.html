@@ -1,12 +1,31 @@
-<div role="list">
-  @for (message of messages$ | async; track message; let i = $index) {
-  <app-message
-    [message]="message"
-    [no]="i"
-    role="listitem"
-    [attr.aria-posinset]="i + 1"
-    [attr.aria-setsize]="(messages$ | async)?.length"
+<div role="main" aria-label="Chat area" class="">
+  <div
+    #messageContainer
+    role="list"
+    class="border-2 w-full max-h-[40rem] overflow-auto bg-[#111827] border-blue-400 p-4 rounded-lg flex gap-5 flex-col"
   >
-  </app-message>
-  }
+    @for (message of messages$ | async; track message; let i = $index) {
+    <div
+      [ngClass]="message.isAi ? 'justify-start' : 'justify-end'"
+      class="flex"
+    >
+      <app-message
+        [message]="message"
+        [no]="i"
+        role="listitem"
+        [attr.aria-posinset]="i + 1"
+        [attr.aria-setsize]="(messages$ | async)?.length"
+      >
+      </app-message>
+    </div>
+    } @if(processing){
+    <span class="text-gray-400 text-xs" aria-live="polite" role="status">
+      AI processing your request...
+    </span>
+    }
+  </div>
+
+  <div role="region" aria-label="Message input area">
+    <app-create-message></app-create-message>
+  </div>
 </div>

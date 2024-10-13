@@ -1,10 +1,10 @@
-import { Component, inject, Inject } from '@angular/core';
-import { CreateMessageModel } from '../../models/message.model';
+import { Component, EventEmitter, inject, Inject, Output } from '@angular/core';
+import { CreateMessageModel, Message } from '../../models/message.model';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MessageStatus } from '../../models/message-status.enum';
 import { MessageComponent } from '../message/message.component';
-import { catchError, of, take, tap } from 'rxjs';
+import { catchError, finalize, of, take, tap } from 'rxjs';
 import { MessagesService } from '../../api';
 
 @Component({
@@ -25,11 +25,9 @@ export class CreateMessageComponent {
     this.messageService
       .send({ content: this.message.content })
       .pipe(
-        tap({
-          complete: () => {
-            this.message.status = MessageStatus.SENT;
-            this.message.reset();
-          },
+        finalize(() => {
+          this.message.status = MessageStatus.SENT;
+          this.message.reset();
         }),
         catchError((err) => {
           console.error('Error posting message:', err);
