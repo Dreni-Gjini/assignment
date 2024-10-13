@@ -12,6 +12,6 @@ export class LoginInput {
     description: 'The password of the user',
   })
   @IsNotEmpty()
-  @MinLength(8)
+  @MinLength(6)
   password: string;
 }

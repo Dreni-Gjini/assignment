@@ -14,9 +14,9 @@ export class RegisterInput {
     description:
       'The password of the user. Must be at least 8 characters long.',
     example: 'strongPassword123',
-    minLength: 8,
+    minLength: 6,
   })
   @IsNotEmpty()
-  @MinLength(8)
+  @MinLength(6)
   password: string;
 }
