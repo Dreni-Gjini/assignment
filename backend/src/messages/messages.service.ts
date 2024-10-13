@@ -73,8 +73,7 @@ export class MessagesService {
     try {
       return this.messages.filter(
         (message) =>
-          message.timestamp > lastFetched &&
-          (message.userId === userId || message.isAi),
+          message.timestamp > lastFetched && message.userId === userId,
       );
     } catch (error) {
       throw new HttpException(

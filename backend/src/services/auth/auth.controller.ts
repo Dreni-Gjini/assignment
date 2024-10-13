@@ -12,7 +12,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('/register')
-  @ApiOperation({ summary: 'Register a new user' })
+  @ApiOperation({ summary: 'Register a new user', operationId: 'register' })
   @ApiResponse({ status: 201, description: 'User registered successfully' })
   @ApiResponse({ status: 400, description: 'Bad request, invalid input' })
   register(@Body() registerInput: RegisterInput): Promise<Token> {
@@ -20,7 +20,7 @@ export class AuthController {
   }
 
   @Post('/login')
-  @ApiOperation({ summary: 'User login' })
+  @ApiOperation({ summary: 'User login', operationId: 'login' })
   @ApiResponse({ status: 201, description: 'Login successful' })
   @ApiResponse({
     status: 401,

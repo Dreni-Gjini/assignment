@@ -25,6 +25,10 @@ export class MessagesController {
     description: 'Internal Server Error during message creation',
   })
   @ApiResponse({ status: 400, description: 'Invalid input data' })
+  @ApiOperation({
+    summary: 'Send a message',
+    operationId: 'send',
+  })
   @Post()
   create(@Body() createMessageDto: CreateMessageDto, @UserEntity() user: User) {
     return this.messagesService.createMessage(createMessageDto, user.id);
@@ -37,6 +41,10 @@ export class MessagesController {
     description: 'Internal Server Error during message retrieval ',
   })
   @ApiResponse({ status: 403, description: 'Forbidden' })
+  @ApiOperation({
+    summary: 'Retrieve all messages',
+    operationId: 'findAll',
+  })
   @Get()
   findAll(@UserEntity() user: User, @Query('timestamp') timestamp: string) {
     const lastFetched = new Date(Number(timestamp));
