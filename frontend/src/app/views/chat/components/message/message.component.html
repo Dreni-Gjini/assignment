@@ -1,9 +1,9 @@
 <div
   [ngClass]="{
-    'flex flex-col text-white max-w-[320px] rounded-xl leading-1.5 p-2 rounded-tr-none border-gray-200': true,
+    'flex flex-col text-white max-w-[320px] break-words rounded-xl leading-1.5 p-2 rounded-tr-none border-gray-200': true,
     'bg-gray-700 rounded-tl-none rounded-tr-xl': message.isAi,
-    'bg-green-900 ': message.status === 'sent',
-    'bg-blue-900': message.status === 'draft',
+    'bg-blue-500 ': message.status === 'sent',
+    'bg-blue-500/70': message.status === 'draft',
     'bg-slate-700': message.status === 'pending',
     'bg-red-600': message.status === 'failed',
 
@@ -11,9 +11,9 @@
   role="region"
   aria-label="Message"
 >
-  <span class="block text-xs">
-    {{ message.isAi ? "AI Bot" : "You" }}
-  </span>
+  <div class="flex items-center justify-between gap-4 text-xs">
+    <span>{{ message.isAi ? "AI Bot" : "You" }}</span>
+  </div>
   <div class="p-2" class="text-white">
     {{ message.content }}
   </div>

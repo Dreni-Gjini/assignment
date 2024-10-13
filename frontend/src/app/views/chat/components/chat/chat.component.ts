@@ -129,6 +129,17 @@ export class ChatComponent implements OnInit {
         takeUntil(this.destroy$)
       )
       .subscribe((newMessages: Message[]) => {
+        if (newMessages.length === 0) {
+          const defaultMessage: Message = new Message({
+            content: 'Hello, how can i assit you today?',
+            isAi: true,
+            timestamp: new Date(Date.now()),
+            status: MessageStatus.RECEIVED,
+          });
+
+          newMessages.push(defaultMessage);
+        }
+
         this.existingMessages = [...this.existingMessages, ...newMessages];
         this.messagesSubject.next(this.existingMessages);
 

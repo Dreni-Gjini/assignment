@@ -1,0 +1,20 @@
+<div class="mb-4 space-y-1">
+  <label [for]="controlName" class="block text-sm font-medium">
+    {{ label }}
+  </label>
+  <input
+    [id]="controlName"
+    [type]="type"
+    [formControl]="control"
+    [attr.aria-invalid]="ariaInvalid"
+    class="bg-gray-100 block w-full px-3 py-2 rounded-md"
+    [ngClass]="{ 'border-red-500': isInvalid }"
+    [attr.aria-describedby]="controlName + '-error'"
+  />
+
+  @if(isInvalid){
+  <span [id]="controlName + '-error'" class="text-red-500 text-xs" role="alert">
+    {{ errorMessage }}
+  </span>
+  }
+</div>

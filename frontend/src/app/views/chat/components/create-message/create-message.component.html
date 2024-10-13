@@ -1,36 +1,37 @@
-@if (message.isValid()) {
 <div
   role="region"
   aria-label="Message Preview"
-  class="my-10 w-full flex justify-end"
+  class="pr-6 w-full flex justify-end bg-white min-h-[5rem]"
 >
+  @if (message.isValid()) {
   <app-message [message]="message.toMessage()" no="preview"></app-message>
+  }
 </div>
-}
 
-<form (submit)="onSubmit()">
-  <label class="mt-4 block">
-    <div>Write Message</div>
-    <textarea
-      class="block w-full p-2"
+<form (submit)="onSubmit()" class="p-4 bg-white">
+  <div class="relative">
+    <input
+      contenteditable
+      class="block w-full py-2 px-4 bg-gray-100 rounded-full outline-none"
+      placeholder="Write a message"
       required
       [(ngModel)]="message.content"
       [ngModelOptions]="{ standalone: true }"
       aria-label="Message text area"
-    ></textarea>
-  </label>
+    />
 
-  <button
-    type="submit"
-    [disabled]="message.status === 'pending'"
-    [ngClass]="{
-      'py-2 px-4 mt-2 w-full': true,
-      'bg-blue-400 pointer': message.status !== 'pending',
-      'bg-gray-400': message.status === 'pending'
-    }"
-    [attr.aria-busy]="message.status === 'pending' ? 'true' : null"
-    aria-label="Send Message"
-  >
-    Send
-  </button>
+    <button
+      type="submit"
+      [disabled]="message.status === 'pending'"
+      [ngClass]="{
+        'absolute text-blue-500 right-0 top-0 h-10 flex items-center px-4': true,
+        pointer: message.status !== 'pending',
+        'text-blue-500/50': message.status === 'pending'
+      }"
+      [attr.aria-busy]="message.status === 'pending' ? 'true' : null"
+      aria-label="Send Message"
+    >
+      <lucide-angular [img]="SendHorizontal" class="w-5 h-5"></lucide-angular>
+    </button>
+  </div>
 </form>

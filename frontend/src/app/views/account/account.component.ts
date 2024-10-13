@@ -4,14 +4,22 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
+  FormControl,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CustomAuthService } from '../../core/auth/customAuth.service';
+import { SwitchTabComponent } from './components/switch-tab/switch-tab.component';
+import { InputFieldComponent } from './components/input-field/input-field.component';
 
 @Component({
   selector: 'app-account',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    SwitchTabComponent,
+    InputFieldComponent,
+  ],
   templateUrl: './account.component.html',
 })
 export class AccountComponent implements OnInit {
@@ -21,6 +29,10 @@ export class AccountComponent implements OnInit {
   fb = inject(FormBuilder);
   customAuthService = inject(CustomAuthService);
 
+  getControl(name: string) {
+    return this.accountForm.get(name) as FormControl;
+  }
+
   ngOnInit(): void {
     this.accountForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4)]],
@@ -28,8 +40,8 @@ export class AccountComponent implements OnInit {
     });
   }
 
-  onSwitchMode(): void {
-    this.isLoginMode = !this.isLoginMode;
+  onSwitchMode(mode: boolean): void {
+    this.isLoginMode = mode;
   }
 
   onSubmit(): void {
@@ -62,7 +74,7 @@ export class AccountComponent implements OnInit {
     );
   }
 
-  getAriaInvalid(field: string): string {
-    return this.isInvalid(field) ? 'true' : 'false';
+  getAriaInvalid(field: string): boolean {
+    return this.isInvalid(field);
   }
 }

@@ -6,17 +6,19 @@ import { MessageStatus } from '../../models/message-status.enum';
 import { MessageComponent } from '../message/message.component';
 import { catchError, finalize, of, take } from 'rxjs';
 import { MessagesService } from '../../../../api';
+import { LucideAngularModule, SendHorizontal } from 'lucide-angular';
 
 @Component({
   selector: 'app-create-message',
   templateUrl: './create-message.component.html',
   standalone: true,
-  imports: [FormsModule, MessageComponent, NgClass],
+
+  imports: [FormsModule, MessageComponent, NgClass, LucideAngularModule],
   providers: [MessagesService],
 })
 export class CreateMessageComponent {
   messageService = inject(MessagesService);
-
+  readonly SendHorizontal = SendHorizontal;
   message = new CreateMessageModel('', MessageStatus.DRAFT);
 
   onSubmit() {
