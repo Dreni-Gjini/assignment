@@ -4,16 +4,9 @@ info:
   description: API documentation for Chat Messenger
   version: 1.0.0
 paths:
-  /:
-    get:
-      operationId: AppController_getHello
-      parameters: []
-      responses:
-        "200":
-          description: ""
   /auth/register:
     post:
-      operationId: AuthController_register
+      operationId: register
       summary: Register a new user
       parameters: []
       requestBody:
@@ -27,9 +20,11 @@ paths:
           description: User registered successfully
         "400":
           description: Bad request, invalid input
+      tags: &a1
+        - Auth
   /auth/login:
     post:
-      operationId: AuthController_login
+      operationId: login
       summary: User login
       parameters: []
       requestBody:
@@ -43,9 +38,10 @@ paths:
           description: Login successful
         "401":
           description: Unauthorized, invalid credentials
+      tags: *a1
   /messages:
     post:
-      operationId: MessagesController_create
+      operationId: send
       summary: Create a new message
       parameters: []
       requestBody:
@@ -61,23 +57,28 @@ paths:
           description: Invalid input data
         "500":
           description: Internal Server Error during message creation
-      tags: &a1
+      tags: &a2
         - Messages
-      security: &a2
+      security: &a3
         - bearer: []
     get:
-      operationId: MessagesController_findAll
+      operationId: findAll
       summary: Retrieve all messages for the user
-      parameters: []
+      parameters:
+        - name: timestamp
+          required: true
+          in: query
+          schema:
+            type: string
       responses:
         "200":
           description: Messages retrieved successfully
         "403":
           description: Forbidden
         "500":
-          description: Internal Server Error during message retrieval
-      tags: *a1
-      security: *a2
+          description: "Internal Server Error during message retrieval "
+      tags: *a2
+      security: *a3
 components:
   schemas:
     RegisterInput:
@@ -91,7 +92,7 @@ components:
           type: string
           description: The password of the user. Must be at least 8 characters long.
           example: strongPassword123
-          minLength: 8
+          minLength: 6
       required:
         - username
         - password
@@ -111,6 +112,12 @@ components:
         - password
     CreateMessageDto:
       type: object
-      properties: {}
+      properties:
+        content:
+          type: string
+          description: The message content
+          example: Hi, can you help me?
+      required:
+        - content
 tags: []
 servers: []
