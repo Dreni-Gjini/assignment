@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { CustomAuthService } from './auth/customAuth.service';
+import { CustomAuthService } from '../auth/customAuth.service';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const customAuthService = inject(CustomAuthService);

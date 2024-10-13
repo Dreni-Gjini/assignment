@@ -21,14 +21,13 @@ import {
   Subject,
   take,
   takeUntil,
-  tap,
 } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { MessagesService } from '../../api';
+import { MessagesService } from '../../../../api';
 import { CreateMessageComponent } from '../create-message/create-message.component';
 import { MessageStatus } from '../../models/message-status.enum';
-import { scrollToBottom } from '../../helpers/dom-utils';
-import { SocketService } from '../../services/socker.service';
+import { scrollToBottom } from '../../../../core/helpers/dom-utils';
+import { SocketService } from '../../../../core/services/socker.service';
 
 @Component({
   selector: 'app-chat',

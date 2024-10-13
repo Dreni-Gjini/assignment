@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CustomAuthService } from '../auth/customAuth.service';
+import { CustomAuthService } from '../../core/auth/customAuth.service';
 
 @Component({
   selector: 'app-account',
@@ -17,7 +17,6 @@ import { CustomAuthService } from '../auth/customAuth.service';
 export class AccountComponent implements OnInit {
   accountForm!: FormGroup;
   isLoginMode = true;
-  loginError = '';
 
   fb = inject(FormBuilder);
   customAuthService = inject(CustomAuthService);

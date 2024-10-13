@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
-import { AuthService } from '../api';
+import { AuthService } from '../../api';
 import { JwtService } from './jwt.service';
 import { AuthApiResponse, JwtPayload } from './models/auth.model';
 import { Router } from '@angular/router';

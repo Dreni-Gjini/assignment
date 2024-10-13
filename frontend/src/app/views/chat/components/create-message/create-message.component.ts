@@ -1,11 +1,11 @@
-import { Component, EventEmitter, inject, Inject, Output } from '@angular/core';
-import { CreateMessageModel, Message } from '../../models/message.model';
+import { Component, inject } from '@angular/core';
+import { CreateMessageModel } from '../../models/message.model';
 import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MessageStatus } from '../../models/message-status.enum';
 import { MessageComponent } from '../message/message.component';
-import { catchError, finalize, of, take, tap } from 'rxjs';
-import { MessagesService } from '../../api';
+import { catchError, finalize, of, take } from 'rxjs';
+import { MessagesService } from '../../../../api';
 
 @Component({
   selector: 'app-create-message',

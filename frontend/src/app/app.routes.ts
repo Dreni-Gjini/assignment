@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { ChatComponent } from './components/chat/chat.component';
-import { authGuard } from './auth/auth.guard';
-import { AccountComponent } from './account/account.component';
+import { ChatComponent } from './views/chat/components/chat/chat.component';
+import { authGuard } from './core/auth/auth.guard';
+import { AccountComponent } from './views/account/account.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/chat', pathMatch: 'full' },
