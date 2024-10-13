@@ -62,4 +62,10 @@
       Switch to {{ isLoginMode ? "Register" : "Login" }}
     </button>
   </form>
+  <div
+    *ngIf="customAuthService.loginErrorSignal()"
+    class="mt-4 p-3 bg-red-100 text-red-600 rounded-md"
+  >
+    {{ customAuthService.loginErrorSignal() }}
+  </div>
 </div>

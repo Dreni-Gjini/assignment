@@ -16,6 +16,7 @@ export class CustomAuthService {
   router = inject(Router);
 
   usernameSignal = signal<string | null>(null);
+  loginErrorSignal = signal<string | null>(null);
 
   login(username: string, password: string): void {
     this.authService
@@ -23,14 +24,18 @@ export class CustomAuthService {
       .pipe(
         tap((response) => {
           this.jwtService.saveToken(response.accessToken);
-
           this.usernameSignal.set(response.user.username);
+
+          this.loginErrorSignal.set(null);
         }),
         take(1)
       )
       .subscribe({
         next: () => this.router.navigate(['/chat']),
-        error: (err) => console.error('Login error:', err),
+        error: (err) => {
+          console.error('Login error:', err);
+          this.loginErrorSignal.set('Invalid username or password');
+        },
       });
   }
 

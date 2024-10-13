@@ -17,6 +17,7 @@ import { CustomAuthService } from '../auth/customAuth.service';
 export class AccountComponent implements OnInit {
   accountForm!: FormGroup;
   isLoginMode = true;
+  loginError = '';
 
   fb = inject(FormBuilder);
   customAuthService = inject(CustomAuthService);
@@ -48,7 +49,6 @@ export class AccountComponent implements OnInit {
   }
 
   login(username: string, password: string): void {
-    console.log('loogin');
     this.customAuthService.login(username, password);
   }
 
