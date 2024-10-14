@@ -131,7 +131,7 @@ export class ChatComponent implements OnInit {
       .subscribe((newMessages: Message[]) => {
         if (newMessages.length === 0) {
           const defaultMessage: Message = new Message({
-            content: 'Hello, how can i assit you today?',
+            content: 'Hello, how can i assist you today?',
             isAi: true,
             timestamp: new Date(Date.now()),
             status: MessageStatus.RECEIVED,
